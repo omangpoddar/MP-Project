@@ -156,7 +156,6 @@ def VBoW(X,dict_size):
 		print(i)
 
 	return X_VBoW
-	
 
 def clean_img(img) :
 	#prepreocess img : normalize and resize
@@ -218,14 +217,14 @@ def load_data(path_list) :
 	return X_train,y
 
 
-# def FeatureUnion(X):
-# 	X_pca = pca_features(X,n_comp=5)
-# 	X_VBoW = VBoW(X,dict_size= 14)
-# 	X_Visual = VisualFeatures(X)    # gpr+ppr+epr
+def FeatureUnion(X):
+	X_pca = pca_features(X,n_comp=5)
+	X_VBoW = VBoW(X,dict_size= 14)
+	X_Visual = VisualFeatures(X)    # gpr+ppr+epr
 	
-# 	X = np.concatenate([X_pca,X_VBoW,X_Visual],axis=1)
+	X = np.concatenate([X_pca,X_VBoW,X_Visual],axis=1)
 
-# 	return X
+	return X
 
 if __name__ == "__main__":
 	# Make Pathlist
@@ -246,7 +245,7 @@ if __name__ == "__main__":
 		X,y = load_data(p)
 		print (X.shape , y.shape)
 		print("\n")
-		# Prepare Data : Get Features 
+		#Prepare Data : Get Features 
 		X_pca = pca_features(X,n_comp=5)
 		print("X_shape after pca=", X_pca.shape)
 		X_VBoW = VBoW(X,dict_size= 14)
@@ -289,8 +288,10 @@ if __name__ == "__main__":
 			s1 = s1+(a[i][0][j])
 		a1.append(s1)
 	print(a1)
-
-
+	file = open("t.txt","w")
+	for i in range(len(a1)):
+		file.write(a1[i]+"\n")
+	file.close() 
 	'''ans={0:"pitch",1:"batsmen",2:"ground",3:"player",
 		 4:"boundary",5:"crowd",6:"sky"}
 	for i in range(len(output)) :
@@ -298,4 +299,4 @@ if __name__ == "__main__":
 		plt.imshow(img)
 		plt.title(ans[output[i]])
 		plt.show()
-	'''
+	''' 
