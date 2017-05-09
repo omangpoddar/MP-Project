@@ -1,4 +1,5 @@
 
+
 from pymining import seqmining
 import pickle as cp
 import numpy as np
@@ -18,6 +19,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
+from sklearn import svm
 counter=0
 filename_list=[]
 
@@ -238,11 +240,11 @@ if __name__ == "__main__":
                 test.append(line)
         print(test)    
            
-        for k in range(len(path_list)):
+        for k1 in range(len(path_list)):
             print(k)
             p=[]
-            path_list[k]+='*.jpg'
-            p.append(path_list[k])
+            path_list[k1]+='*.jpg'
+            p.append(path_list[k1])
             X,y = load_data(p)
             print (X.shape , y.shape)
             print("\n")
@@ -290,7 +292,13 @@ if __name__ == "__main__":
             X_DATA.append(a2)
             Y_DATA.append(k)
     print(len(X_DATA))
-    print(len(Y_DATA))        
+    print(len(Y_DATA)) 
+    print(Y_DATA)
+    clf1=svm.SVC()
+    clf1.fit(X_DATA,Y_DATA)
+    filename='event_classify.pkl'
+    cp.dump(clf1,open(filename,'wb'))
+
 # print(a2)  
 # seqs = ( 'caabc', 'abcb', 'cabc', 'abbca')
 # freq_seqs = seqmining.freq_seq_enum(seqs, 2)
